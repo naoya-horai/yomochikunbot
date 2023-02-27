@@ -1,14 +1,14 @@
 from os import sync,getenv
 import discord
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 
 # get .env
-load_dotenv()
+#load_dotenv()
 # get serverid txtid
-SERVER_ID = getenv("SERVER_ID")
-TXT_ID = getenv("TXT_ID")
+SERVER_ID = getenv("SERVER")
+TXT_ID = getenv("TEXT")
 print("Success > Got SERVER and TEXT ID.")
 
 client = discord.Client(intents=discord.Intents.all())
