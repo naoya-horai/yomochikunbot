@@ -7,8 +7,8 @@ from datetime import datetime, timedelta
 # get .env
 #load_dotenv()
 # get serverid txtid
-SERVER_ID = getenv("SERVER")
-TXT_ID = getenv("TEXT")
+SERVER_ID = int(getenv("SERVER"))
+TXT_ID = int(getenv("TEXT"))
 print("Success > Got SERVER and TEXT ID.")
 
 client = discord.Client(intents=discord.Intents.all())
