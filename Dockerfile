@@ -1,4 +1,4 @@
-FROM python3.10
+FROM python:3.9.6-alpine
 WORKDIR /bot
 COPY requirements.txt /bot/
 RUN pip install -r requirements.txt
