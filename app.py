@@ -1,6 +1,8 @@
 from os import sync,getenv
 import discord
 from datetime import datetime, timedelta
+from flask import Flask
+import threading
 #from dotenv import load_dotenv
 
 
@@ -10,7 +12,7 @@ from datetime import datetime, timedelta
 SERVER_ID = int(getenv("SERVER"))
 TXT_ID = int(getenv("TEXT"))
 print("Success > Got SERVER and TEXT ID.")
-
+app = Flask(__name__)
 client = discord.Client(intents=discord.Intents.all())
 
 
@@ -38,5 +40,19 @@ async def on_voice_state_update(member, before, after):
         await alert_channel.send(msg)
 
 
+@app.route('/')
+def hello():
+    name = "discordbotです"
+    return name
 # run client
-client.run(getenv("TOKEN"))
+
+def main():
+  
+    client.run(getenv("TOKEN"))
+
+def main1():
+    app.run(debug=True)
+
+if __name__ == "__main__":
+   thread1 = threading.Thread(target=main)
+   thread2 = threading.Thread(target=main1)
