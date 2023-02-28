@@ -1,4 +1,4 @@
 flask
 discordbot.py
-#gunicorn
+gunicorn
 python-dotenv
