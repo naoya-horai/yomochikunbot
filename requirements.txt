@@ -2,4 +2,5 @@ flask
 discordbot.py
 gunicorn
 python-dotenv
-petpetgif
+requests
+pet-pet-gif
