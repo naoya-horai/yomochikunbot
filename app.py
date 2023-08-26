@@ -1,6 +1,8 @@
-from os import sync,getenv
+from os import sync,getenv,remove
 import discord
 from datetime import datetime, timedelta
+from petpetgif import petpet
+import requests
 #from flask import Flask
 #import threading
 #from dotenv import load_dotenv
@@ -15,7 +17,11 @@ print("Success > Got SERVER and TEXT ID.")
 #app = Flask(__name__)
 client = discord.Client(intents=discord.Intents.all())
 
-
+def download_img(url, file_name):
+    r = requests.get(url, stream=True)
+    if r.status_code == 200:
+        with open(file_name, 'wb') as f:
+            f.write(r.content)
 # client start
 @client.event
 async def on_ready():
@@ -39,7 +45,23 @@ async def on_voice_state_update(member, before, after):
         print(msg)
         await alert_channel.send(msg)
 
-
+@client.event
+async def on_message(message):
+    if message.content == '/petpet':
+        await message.channel.send("もちもち")
+        try:
+            download_img(message.attachments[0].url, "image.png")
+            #print("dlできたかも")
+        except:
+            pass
+        try:
+            petpet.make('./image.png','out.gif')
+            await message.channel.send(file = discord.File('./out.gif'))
+            remove('./image.png')
+            remove('./out.gif')
+        except:
+            print("画像がないかも！")
+            pass
 #@app.route('/')
 #def hello():
 #    name = "discordbotです"
